@@ -2,12 +2,21 @@ const express = require("express");
 const router = express.Router();
 const User = require("../models/user");
 
-console.log(User);
+router.get("/", async (req, res, next) => {
+    // const allUsers = await User.getAllUsers();
+//   res.status(200).send(allUsers);
 
+  // User.getAllUsers((err, users) => {
+  //   if(err){
+  //     res.json({success: false, msg:'Something failed'});
+  //   } else {
+  //     res.json({success: true, msg:`All users : ${users}`});
+  //   }
+  // });
+  let xxx = await User.getAllUsers();
+  console.log(xxx);
+    res.json(xxx);
 
-router.get("/", (req, res, next) => {
-
-  res.status(200).send("GET DZIAŁAs");
 });
 
 router.post("/", async (req, res, next) => {
