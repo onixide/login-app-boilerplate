@@ -1,15 +1,16 @@
+const express = require('express');
+const main = require("../routes/main")
+const users = require("../routes/users")
+
+
 module.exports = function (app) {
+    //zeby jsony prtzetwarzalo z req itd
+    app.use(express.urlencoded({ extended: true }));
+    app.use(express.json());
 
-    app.get('/', (req, res, next) => {
-        res.status(200).send("GET DZIAŁA");
-    })
+    app.use('/', main);
+    app.use('/users', users);
 
+    require("../middleware/error-middleware")(app);
 
-  //middleware do bledow, musi byc na k0ncu, pamietac o next w handlerze,
-//    chwyta TYLKO Z REQUEST PROCESIN PIPELINE wyjatki, ignoruje wszystko
-//  poza kontekstem expressa 
-    app.use(function (error, req, res, next) {
-        console.log("Błąd serwera. Z ostatniego middleware. ");
-        res.status(500).send("Błąd serwera. Z ostatniego middleware. ");
-    })
 }
