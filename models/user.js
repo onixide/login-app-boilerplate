@@ -1,11 +1,11 @@
 const mongoose = require("mongoose");
 
 const UserSchema = new mongoose.Schema({
-    login: {
+    email: {
         type: String,
         required: true,
         unique: true,
-        minlength: 3,
+        minlength: 1,
         maxlength: 255,
         trim: true
     },
@@ -16,50 +16,40 @@ const UserSchema = new mongoose.Schema({
         maxlength: 1024,
         trim: true
     },
-    email: {
-        type: String,
-        required: true,
-        unique: true,
-        minlength: 1,
-        maxlength: 255,
-        trim: true
-    },
     created: {
         type: Date,
         default: Date.now
     }
 });
 
-const User = module.exports = mongoose.model("User", UserSchema);
+const User = (module.exports = mongoose.model("User", UserSchema));
 
-// module.exports.getAllUsers = function (callback) {
-//  setTimeout(() => {
-//      User.find({"login" : "login1"}, callback);
-//  },2000)
+module.exports.getAllUsers = function (callback) {
+    setTimeout(() => {
+        User.find({}, callback);
+    }, 2000);
+};
 
-// }
-https://stackoverflow.com/questions/24928846/get-return-value-from-settimeout
-async function x() {
-    setTimeout(function() {
-               return await User.find({"login" : "login1"});
-            });
-}
+module.exports.getUser = function (email, callback) {
+    setTimeout(() => {
+        User.findOne(
+            {
+                email: email
+            },
+            callback
+        );
+    }, 2000);
+};
 
+module.exports.deleteUser = function (id, callback) {
+    setTimeout(() => {
+        User.findByIdAndDelete(id, callback)
+    }, 2000);
+};
 
-module.exports.getAllUsers = async function () {
-    
-    // let promise = new Promise(function(resolve, reject) {
-    //     setTimeout(function() {
-    //         User.find({"login" : "login1"});
-    //     });
-    //   });
-    //   return promise;
-    
-   
-        const result = await x();
-        console.log(result); // --> 'done!';
-        return result;
-
-
-    }
-
+// 5c5984cfd4244f0ef04c452a
+module.exports.updateUser = function (id, updated, callback) {
+    setTimeout(() => {
+        User.findByIdAndUpdate(id, updated, {new : true}, callback);
+    }, 2000);
+};

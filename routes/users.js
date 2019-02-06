@@ -4,67 +4,89 @@ const User = require("../models/user");
 
 router.get("/", async (req, res, next) => {
     // const allUsers = await User.getAllUsers();
-//   res.status(200).send(allUsers);
+    //   res.status(200).send(allUsers);
 
-  // User.getAllUsers((err, users) => {
-  //   if(err){
-  //     res.json({success: false, msg:'Something failed'});
-  //   } else {
-  //     res.json({success: true, msg:`All users : ${users}`});
-  //   }
-  // });
-  let xxx = await User.getAllUsers();
-  console.log(xxx);
-    res.json(xxx);
+    //   User.getAllUsers((err, users) => {
+    //     if(err){
+    //       res.json({success: false, msg:'Something failed'});
+    //     } else {
+    //       res.json({success: true, msg:`All users : ${users}`});
+    //     }
+    //   });
+
+    User.getUser("email2", (err, user) => {
+        if (err) {
+            res.json({ success: false, msg: 'Something failed' });
+        } else {
+            res.json({ success: true, msg: `All users : ${user}` });
+        }
+
+    })
+
 
 });
+
+router.put("/:id", (req, res, next) => {
+
+    User.updateUser(req.params.id, req.body, (err, updated) => {
+        if (err) {
+            console.log(err);
+            res.json({ success: false, msg: 'Something failed' });
+        } else {
+            res.json({ success: true, msg: `All users : ${updated}` });
+        }
+    });
+
+
+})
+
 
 router.post("/", async (req, res, next) => {
 
     try {
 
-//         // let user = await Users.findOne({email: req.body.email}) || await Users.findOne({login: req.body.login});
-        
-//         // if(user) return res.status(400).send("Login lub email istnieje już w bazie");
-//         //tworzenie nowego dokumentu
+        //         // let user = await Users.findOne({email: req.body.email}) || await Users.findOne({login: req.body.login});
 
-       user = new User ( {login, email, password} = req.body );
+        //         // if(user) return res.status(400).send("Login lub email istnieje już w bazie");
+        //         //tworzenie nowego dokumentu
 
-//         //bez lodasha
+        user = new User({ login, email, password } = req.body);
+
+        //         //bez lodasha
         // user = new Users({
         //     login: req.body.login,
         //     email: req.body.email,
         //     password: req.body.password
         // });
 
-//         // z lodashem
-//         // user = new Users(_.pick(req.body, ["login", "password", "email", "scope"]));
+        //         // z lodashem
+        //         // user = new Users(_.pick(req.body, ["login", "password", "email", "scope"]));
 
-//         // let salt = await bcrypt.genSalt(10);
-//         // user.password = await bcrypt.hash(user.password, salt);
+        //         // let salt = await bcrypt.genSalt(10);
+        //         // user.password = await bcrypt.hash(user.password, salt);
 
 
-//         //zapis i nadpisanie zmienna zapisanymi danymi asynchronicznie
+        //         //zapis i nadpisanie zmienna zapisanymi danymi asynchronicznie
         user = await user.save();
-//         //zwrotka do klienta zapisanymi danymi z bazy ( z key itd)
-        
-//         //bez lodasha
-//         // res.send({
-//         //     login: user.login,
-//         //     email: user.email
-//         // });
+        //         //zwrotka do klienta zapisanymi danymi z bazy ( z key itd)
+
+        //         //bez lodasha
+        //         // res.send({
+        //         //     login: user.login,
+        //         //     email: user.email
+        //         // });
 
 
-//         //takie jakby logowanie odrazu po rejestracji
-//         // const token = user.generateJWTToken();
+        //         //takie jakby logowanie odrazu po rejestracji
+        //         // const token = user.generateJWTToken();
 
-//         // res.header('x-auth-token', token).send(_.pick(user, ['login', 'email']));
+        //         // res.header('x-auth-token', token).send(_.pick(user, ['login', 'email']));
         res.send(JSON.stringify(user));
     }
-    catch (ex) { 
+    catch (ex) {
         next(ex);
-     }
+    }
 
-  });
+});
 
 module.exports = router;

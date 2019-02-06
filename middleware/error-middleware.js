@@ -7,6 +7,7 @@ module.exports = function (app) {
     //  chwyta TYLKO Z REQUEST PROCESIN PIPELINE wyjatki, ignoruje wszystko poza
     //   kontekstem expressa (pipeline chyba jest z ekspresa w takim razie ;p)
     app.use(function (err, req, res, next) {
+        console.log(err);
         console.log(`Błąd serwera z ostatniego middleware - ${err.message}`);
         res.status(500).send(`Błąd serwera z ostatniego middleware - ${err.message}`);
     });
