@@ -5,6 +5,7 @@ const helmet = require("helmet");
 
 require("./init/error-handling")();
 require("./init/db")();
+require('./init/passport');
 
 app.use(helmet());
 app.use(morgan("tiny"));

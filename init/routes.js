@@ -1,6 +1,7 @@
 const express = require('express');
 const main = require("../routes/main")
 const users = require("../routes/users")
+const auth = require("../routes/auth")
 
 
 module.exports = function (app) {
@@ -10,6 +11,7 @@ module.exports = function (app) {
 
     app.use('/', main);
     app.use('/users', users);
+    app.use('/auth', auth);
 
     require("../middleware/error-middleware")(app);
 

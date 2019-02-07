@@ -40,7 +40,7 @@ router.post("/", async (req, res, next) => {
 
         let user = await User.findOne({email: req.body.email});
         //user exist
-        if (user) return res.status(400).json({success: false, message : `Użytkownik - ${user.email} - już istnieje`, user : user});
+        if (user) return res.status(409).json({success: false, message : `Użytkownik - ${user.email} - już istnieje`});
         // user dont exist
         user = new User({email, password} = req.body);
         // password hash
