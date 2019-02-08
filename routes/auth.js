@@ -17,7 +17,7 @@ router.post("/", async (req, res, next) => {
     if (!validPassword)
       return res.json({ success: false, msg: "Incorrect password" }).status(400);
 
-    const token = jwt.sign({ data: user }, db.secret, {
+    const token = jwt.sign({ data: user, www: "WWZXCAWER" }, db.secret, {
       expiresIn: 604800 // 1 week
     });
 
