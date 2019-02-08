@@ -1,10 +1,10 @@
 const mongoose = require("mongoose");
+const db = require("../config/db")
 
 module.exports = function () {
-    const dbUri = "mongodb://admin:zipera1@ds123224.mlab.com:23224/newyearnewme";
 
     mongoose
-        .connect(dbUri, { useNewUrlParser: true })
+        .connect(db.database, { useNewUrlParser: true })
         .then(() => console.log("Połączono z bazą danych."))
         .catch(err => {
             console.log(err.errmsg);
