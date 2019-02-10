@@ -13,5 +13,5 @@ app.use(morgan("tiny"));
 
 require("./init/routes")(app);
 
-const port = 3001 || process.env.PORT;
+const port = process.env.PORT || 3000;
 app.listen(port, () => console.log(`Listening ${port}!`));

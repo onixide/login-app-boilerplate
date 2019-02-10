@@ -1,0 +1,9 @@
+{
+    "jwt" : {
+        "secret" : "jwt_secret"
+    },
+    "db" : {
+        "url" : "nynm-db-url"
+    } 
+
+}

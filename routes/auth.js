@@ -2,45 +2,40 @@ const express = require("express");
 const router = express.Router();
 const jwt = require("jsonwebtoken");
 const passport = require("passport");
-const db = require("../config/db");
+const config = require("config");
 const User = require("../models/user");
 const bcrypt = require("bcrypt");
 
 router.post("/", async (req, res, next) => {
-  try {
-    let user = await User.findOne({ email: req.body.email });
-    if (!user)
-      return res.json({ success: false, msg: "User not found" }).status(400);
+	try {
+		let user = await User.findOne({ email: req.body.email });
+		if (!user)
+			return res.json({ success: false, msg: "Email not found" }).status(404);
 
-    const validPassword = await bcrypt.compare(req.body.password, user.password);
-    console.log(validPassword);
-    if (!validPassword)
-      return res.json({ success: false, msg: "Incorrect password" }).status(400);
+		const validPassword = await bcrypt.compare(req.body.password, user.password);
+		if (!validPassword)
+			return res.json({ success: false, msg: "Incorrect password" }).status(403);
 
-    const token = jwt.sign({ data: user, www: "WWZXCAWER" }, db.secret, {
-      expiresIn: 604800 // 1 week
-    });
+		const token = jwt.sign({ data: user, www: "something else" }, config.get('jwt.secret'), {
+			expiresIn: 86400 // 1 day expire
+		});
 
-    res.json({
-      success: true,
-      token: `Bearer ${token}`,
-      user: {
-        id: user._id,
-        email: user.email
-      }
-    });
-  }
-  catch (ex) {
-    next(ex);
-  }
+		res.json({
+			success: true,
+			token: `Bearer ${token}`,
+			user: {
+				id: user._id,
+				email: user.email
+			}
+		});
+	}
+	catch (ex) {
+		next(ex);
+	}
 });
 
-// Profile
-router.get(
-  "/profile",
-  passport.authenticate("jwt", { session: false }), (req, res, next) => {
-    res.json({ user: req.user });
-  }
-);
+router.get("/access", passport.authenticate("jwt", { session: false }), (req, res, next) => {
+	res.json({ user: req.user });
+});
 
 module.exports = router;
