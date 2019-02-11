@@ -1,3 +1,13 @@
-<p>
-  users works!
-</p>
+<div class="projects-list-container">
+	<p>XAXAXA</p>
+	<button (click)="getAllUsers()">getAllUsers</button>
+	<ul class="container">
+		<li *ngFor="let user of users" (click)="onSelect(user)">
+			<p> {{ user._id }}</p>
+			<p> {{ user.email }}</p>
+			<p> {{ user.created }}</p>
+
+		</li>
+		<app-user [user]="selectedUser"></app-user>
+	</ul>
+</div>
