@@ -3,7 +3,8 @@
         "secret" : "jwt_secret"
     },
     "db" : {
-        "url" : "nynm-db-url"
+        "login" : "db_login",
+        "password" : "db_password"
     } 
 
 }

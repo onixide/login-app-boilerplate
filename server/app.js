@@ -3,6 +3,10 @@ const app = express();
 const morgan = require("morgan");
 const helmet = require("helmet");
 const passport = require('passport');
+const cors = require('cors')
+
+
+app.use(cors());
 
 require("./init/error-handling")();
 require("./init/db-connect")();
