@@ -11,7 +11,9 @@ export class UsersComponent implements OnInit {
   constructor(private usersService: UsersService) { }
 
   users: [];
-  selectedUser: User;
+  selectedUser;
+
+  selected;
 
   ngOnInit() {
   }
@@ -25,9 +27,22 @@ export class UsersComponent implements OnInit {
       )
   }
 
-  onSelect(user: User): void {
-    this.selectedUser = user
-    console.log(user);
+  onSelect(action: string, data: Object = {}): void {
+    // this.selectedUser = user
+    // console.log(this.selectedUser);
+
+    this.selected = {
+      action : action,
+      data : data
+    }
+
+    console.log(this.selected);
   }
+
+  // onSelectNewUser(){
+  //   this.selectedUser = "newUser"
+  //   console.log(this.selectedUser);
+  // }
+
 
 }

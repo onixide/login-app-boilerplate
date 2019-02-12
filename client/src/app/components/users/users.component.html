@@ -1,13 +1,16 @@
-<div class="projects-list-container">
+<div>
 	<p>XAXAXA</p>
 	<button (click)="getAllUsers()">getAllUsers</button>
-	<ul class="container">
-		<li *ngFor="let user of users" (click)="onSelect(user)">
+	<button (click)="onSelect('newUser')">New User</button>
+	<div class="wrapper">
+	<ul>
+		<li *ngFor="let user of users" (click)="onSelect('selectUser', {user: user})">
 			<p> {{ user._id }}</p>
 			<p> {{ user.email }}</p>
 			<p> {{ user.created }}</p>
 
 		</li>
-		<app-user [user]="selectedUser"></app-user>
 	</ul>
+		<app-user [selected]="selected"></app-user>
+	</div>	
 </div>

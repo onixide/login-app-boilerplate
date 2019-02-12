@@ -1,4 +1,7 @@
-<div *ngIf="user">
+<div *ngIf="selected.action === 'none'"> </div>
+
+
+<div *ngIf="selected.action === 'selectedUser'">
 
     <h2>{{user.email | uppercase}} Details</h2>
     <div><span>id: </span>{{user._id}}</div>
@@ -8,4 +11,8 @@
       </label>
     </div>
   
+  </div>
+
+  <div *ngIf="selected.action === 'newUser'">
+    <p>NEW USER</p>
   </div>

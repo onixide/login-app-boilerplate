@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpResponse } from '@angular/common/http';
 import { map } from "rxjs/operators";
+import { User } from '../../models/user.model';
 
 @Injectable({
   providedIn: 'root'
@@ -16,5 +17,9 @@ export class UsersService {
     return this.http.get(this.configUrl)
     }
  
+    addUser(user: User) {
+      return this.http.post(this.configUrl, user);
+    }
+
 }
 

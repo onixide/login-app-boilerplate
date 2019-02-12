@@ -1,5 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { User } from 'src/app/models/user.model';
+import { NONE_TYPE } from '@angular/compiler/src/output/output_ast';
 
 @Component({
   selector: 'app-user',
@@ -8,9 +9,12 @@ import { User } from 'src/app/models/user.model';
 })
 export class UserComponent implements OnInit {
 
-  @Input() user: User;
-
+  @Input() selected: Object;
+  
   constructor() { }
+  
+  select = { action: 'none', data: {}};
+
 
   ngOnInit() {
   }
