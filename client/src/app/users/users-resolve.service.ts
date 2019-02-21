@@ -13,8 +13,6 @@ export class UsersResolveService implements Resolve<User> {
 
   resolve(route: ActivatedRouteSnapshot): Observable<any> | Promise<any> | any {
     console.log('RESOLVER GET ALL USERS WORKS');
-
-    console.log(this.usersService.getUsers());
     return this.usersService.getUsers();
   }
 }

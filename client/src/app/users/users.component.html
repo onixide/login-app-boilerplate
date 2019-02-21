@@ -1,7 +1,11 @@
 <div class="row">
   <div class="col-sm d-flex justify-content-center">
-    <button (click)="getAllUsers()">getAllUsers</button>
-    <button (click)="onSelect('newUser')">New User</button>
+    <button (click)="getAllUsers()" class="btn btn-light ml-1 mr-1">
+      Get Users Again
+    </button>
+    <button (click)="onSelect('newUser')" class="btn btn-light ml-1 mr-1">
+      Add New User
+    </button>
   </div>
 </div>
 <div class="row">
@@ -13,9 +17,16 @@
         class="list-group-item list-group-item-action"
         style="cursor: pointer;"
       >
-        <p class="font-weight-normal">{{ user._id }}</p>
-        <p class="font-weight-normal">{{ user.email }}</p>
-        <p class="font-weight-normal">{{ user.created }}</p>
+        <p class="font-weight-normal">
+          <span class="font-weight-bold">ID: </span>{{ user._id }}
+        </p>
+        <p class="font-weight-normal">
+          <span class="font-weight-bold">Email: </span>{{ user.email }}
+        </p>
+        <p class="font-weight-normal">
+          <span class="font-weight-bold">Created : </span
+          >{{ user.created | date: 'medium' }}
+        </p>
       </li>
     </div>
   </div>
