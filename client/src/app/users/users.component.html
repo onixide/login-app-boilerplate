@@ -1,13 +1,22 @@
-<div>
-	<button (click)="getAllUsers()">getAllUsers</button>
-	<button (click)="onSelect('newUser')">New User</button>
-	<div class="wrapper">
-		<ul>
-			<li *ngFor="let user of users" (click)="onSelect('selectUser', {user: user})">
-				<p> {{ user._id }}</p>
-				<p> {{ user.email }}</p>
-				<p> {{ user.created }}</p>
-			</li>
-		</ul>
-	</div>
+<div class="row">
+  <div class="col-sm d-flex justify-content-center">
+    <button (click)="getAllUsers()">getAllUsers</button>
+    <button (click)="onSelect('newUser')">New User</button>
+  </div>
+</div>
+<div class="row">
+  <div class="wrapper col-sm d-flex justify-content-center mt-2">
+    <div class="list-group">
+      <li
+        *ngFor="let user of users"
+        (click)="onSelect(user)"
+        class="list-group-item list-group-item-action"
+        style="cursor: pointer;"
+      >
+        <p class="font-weight-normal">{{ user._id }}</p>
+        <p class="font-weight-normal">{{ user.email }}</p>
+        <p class="font-weight-normal">{{ user.created }}</p>
+      </li>
+    </div>
+  </div>
 </div>

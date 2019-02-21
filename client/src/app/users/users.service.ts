@@ -13,7 +13,7 @@ export class UsersService {
   configUrl = 'http://localhost:3000/users';
 
   getUsers() {
-    //http metody zwracaja observable, nie sa wykonywane dopuki nie  subcribe ich
+    // http metody zwracaja observable, nie sa wykonywane dopuki nie  subcribe ich
     return this.http.get(this.configUrl)
     }
  
