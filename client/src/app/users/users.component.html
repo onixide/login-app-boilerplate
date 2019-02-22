@@ -9,7 +9,7 @@
   </div>
 </div>
 <div class="row">
-  <div class="wrapper col-sm d-flex justify-content-center mt-2">
+  <div class="col-sm d-flex justify-content-center mt-2">
     <div class="list-group">
       <li
         *ngFor="let user of users"
@@ -18,14 +18,16 @@
         style="cursor: pointer;"
       >
         <p class="font-weight-normal">
-          <span class="font-weight-bold">ID: </span>{{ user._id }}
+          <span class="font-weight-bold">ID: </span>
+          {{ user._id }}
         </p>
         <p class="font-weight-normal">
-          <span class="font-weight-bold">Email: </span>{{ user.email }}
+          <span class="font-weight-bold">Email: </span>
+          {{ user.email }}
         </p>
         <p class="font-weight-normal">
-          <span class="font-weight-bold">Created : </span
-          >{{ user.created | date: 'medium' }}
+          <span class="font-weight-bold">Created : </span>
+          {{ user.created | date: 'medium' }}
         </p>
       </li>
     </div>
