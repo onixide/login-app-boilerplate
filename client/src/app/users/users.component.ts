@@ -12,7 +12,8 @@ export class UsersComponent implements OnInit {
 
   constructor(
     private usersService: UsersService,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private router: Router
   ) {}
 
   ngOnInit() {
@@ -27,6 +28,8 @@ export class UsersComponent implements OnInit {
   }
 
   onSelect(user: User) {
-    console.log(user);
+    console.log(user._id);
+    this.router.navigate([`/users/${user._id}`]);
+    // this.router.navigate([`/auth/register`]);
   }
 }
