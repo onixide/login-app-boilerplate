@@ -14,12 +14,32 @@
         />
       </div>
 
+<<<<<<< HEAD
       <label for="login-login-password" class="pb-2 pt-2">Password :</label>
       <div class="input-group flex-nowrap">
         <input
           formControlName="password"
           type="password"
           name="login-password"
+=======
+<form (ngSubmit)="onLoginSubmit(f)">
+  <div class="row d-flex justify-content-center">
+    <div class="col-9 d-flex flex-column justify-content-center">
+      <span class="pb-2 pt-2">Login : </span>
+      <div class="input-group flex-nowrap">
+        <input
+          type="text"
+          class="form-control"
+          aria-label="Username"
+          aria-describedby="addon-wrapping"
+        />
+      </div>
+
+      <span class="pb-2 pt-2">Password : </span>
+      <div class="input-group flex-nowrap">
+        <input
+          type="password"
+>>>>>>> changes before fetch
           class="form-control"
           aria-label="Password"
           aria-describedby="addon-wrapping"
@@ -27,12 +47,26 @@
       </div>
     </div>
   </div>
+<<<<<<< HEAD
   <div class="row row d-flex justify-content-center">
     <div class="col-9 d-flex align-items-center justify-content-between">
       <span>Forget <a routerLink="/users">password</a>?</span>
       <button type="submit" class="btn btn-light mt-2 mb-2">
+=======
+
+  <div class="row row d-flex justify-content-center">
+    <div class="col-9 d-flex align-items-center justify-content-between">
+      <span>Forget <a routerLink="/users">password</a>?</span>
+      <button class="btn btn-light mt-2 mb-2" type="button">
+>>>>>>> changes before fetch
         Sign in
       </button>
     </div>
   </div>
 </form>
+<<<<<<< HEAD
+=======
+
+<!-- <input name="first" ngModel required #first="ngModel">
+    <input name="last" ngModel> -->
+>>>>>>> changes before fetch
