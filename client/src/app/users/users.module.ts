@@ -7,9 +7,15 @@ import { UserListItemComponent } from './user-list/user-list-item/user-list-item
 import { UsersService } from './users.service';
 import { UsersResolveService } from './users-resolve.service';
 import { UsersRoutingModule } from './users-routing.module';
+import { UserDetailsComponent } from './user-details/user-details.component';
 
 @NgModule({
-  declarations: [UsersComponent, UserListComponent, UserListItemComponent],
+  declarations: [
+    UsersComponent,
+    UserListComponent,
+    UserListItemComponent,
+    UserDetailsComponent
+  ],
   imports: [CommonModule, UsersRoutingModule],
   providers: [UsersService, UsersResolveService]
 })

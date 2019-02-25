@@ -1,8 +1,9 @@
 import { Injectable } from '@angular/core';
-import { Resolve, ActivatedRouteSnapshot } from '@angular/router';
+import { Resolve } from '@angular/router';
+
+import { Observable } from 'rxjs/internal/Observable';
 
 import { User } from '../models/User.model';
-import { Observable } from 'rxjs/internal/Observable';
 import { UsersService } from './users.service';
 
 @Injectable({
@@ -11,7 +12,7 @@ import { UsersService } from './users.service';
 export class UsersResolveService implements Resolve<User> {
   constructor(private usersService: UsersService) {}
 
-  resolve(route: ActivatedRouteSnapshot): Observable<any> | Promise<any> | any {
+  resolve(): Observable<any> | Promise<any> | any {
     console.log('RESOLVER GET ALL USERS WORKS');
     return this.usersService.getUsers();
   }

@@ -7,19 +7,20 @@ import { User } from '../models/user.model';
   providedIn: 'root'
 })
 export class UsersService {
-
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient) {}
 
   configUrl = 'http://localhost:3000/users';
 
   getUsers() {
     // http metody zwracaja observable, nie sa wykonywane dopuki nie  subcribe ich
-    return this.http.get(this.configUrl)
-    }
- 
-    addUser(user: User) {
-      return this.http.post(this.configUrl, user);
-    }
+    return this.http.get(this.configUrl);
+  }
 
+  addUser(user: User) {
+    return this.http.post(this.configUrl, user);
+  }
+
+  getUserByID(userID: string) {
+    return this.http.get(`${this.configUrl}/${userID}`);
+  }
 }
-

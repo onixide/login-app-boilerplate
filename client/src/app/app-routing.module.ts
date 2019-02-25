@@ -1,28 +1,25 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule, PreloadAllModules } from '@angular/router';
-import { UserListItemComponent } from './users/user-list/user-list-item/user-list-item.component';
-import { UsersComponent } from './users/users.component';
 import { UsersModule } from './users/users.module';
-import { UsersResolveService } from './users/users-resolve.service';
-import { LoginComponent } from './auth/login/login.component';
-import { RegisterComponent } from './auth/register/register.component';
+import { AuthModule } from './auth/auth.module';
 
 const routes: Routes = [
+  {
+    path: '',
+    redirectTo: 'auth/login',
+    pathMatch: 'full'
+  },
   {
     path: 'users',
     loadChildren: () => UsersModule
   },
   {
-    path: 'login',
-    component: LoginComponent
-  },
-  {
-    path: 'register',
-    component: RegisterComponent
+    path: 'auth',
+    loadChildren: () => AuthModule
   },
   {
     path: '**',
-    redirectTo: 'login'
+    redirectTo: 'auth/login'
   }
 ];
 
