@@ -5,41 +5,20 @@ import { UserDetailsResolveService } from './user-details/user-details-resolve.s
 import { UsersComponent } from './users.component';
 import { UserDetailsComponent } from './user-details/user-details.component';
 
-// const routes: Routes = [
-//   {
-//     path: '',
-//     component: UsersComponent,
-//     pathMatch: 'full',
-//     resolve: {
-//       usersxa: UsersResolveService
-//     },
-//     children: [
-//       {
-//         path: ':id',
-//         component: UserDetailsComponent,
-//         pathMatch: 'full'
-//         // resolve: {
-//         //   userID: UserDetailsResolveService
-//         // }
-//       }
-//     ]
-//   }
-// ];
-
 const routes: Routes = [
   {
     path: '',
     component: UsersComponent,
     pathMatch: 'full',
     resolve: {
-      usersxa: UsersResolveService
+      users: UsersResolveService
     }
   },
   {
     path: ':id',
     component: UserDetailsComponent,
     resolve: {
-      userID: UserDetailsResolveService
+      user: UserDetailsResolveService
     }
   }
 ];

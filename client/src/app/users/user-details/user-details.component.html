@@ -1,3 +1,26 @@
-<p>
-  user-details works!
-</p>
+<div>
+  <h4 class="text-center mt-3 mb-3">{{ user.email }}</h4>
+  <div
+    *ngIf="!invalidUser; else invalidUserComponent"
+    class="list-group-item list-group-item-action"
+  >
+    <p class="font-weight-normal">
+      <span class="font-weight-bold">ID: </span>
+      {{ user._id }}
+    </p>
+    <p class="font-weight-normal">
+      <span class="font-weight-bold">Created : </span>
+      {{ user.created | date: 'medium' }}
+    </p>
+    <p class="font-weight-normal">
+      <span class="font-weight-bold">Password : </span>
+      {{ user.password }}
+    </p>
+  </div>
+</div>
+
+<ng-template #invalidUserComponent>
+  <p>
+    {{ invalidUser.message }}
+  </p>
+</ng-template>

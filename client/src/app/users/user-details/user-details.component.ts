@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { User } from 'src/app/models/user.model';
+import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 
 @Component({
   selector: 'app-user-details',
@@ -9,6 +10,7 @@ import { User } from 'src/app/models/user.model';
 })
 export class UserDetailsComponent implements OnInit {
   user: User;
+  invalidUser: Boolean = false;
 
   constructor(
     // private recipeService: RecipeService,
@@ -17,9 +19,13 @@ export class UserDetailsComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-    this.route.data.subscribe(data => {
-      console.log(data);
-      this.user = data.usersxa;
+    this.route.data.subscribe(res => {
+      if (res.user.error) {
+        console.log(res.user.error.message);
+        this.invalidUser = res.user.error;
+      }
+      console.log(res.user);
+      this.user = res.user;
     });
   }
 }
