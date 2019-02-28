@@ -10,6 +10,7 @@
           class="form-control"
           aria-label="Username"
           aria-describedby="addon-wrapping"
+          required
         />
       </div>
 
@@ -21,13 +22,18 @@
           class="form-control"
           aria-label="Password"
           aria-describedby="addon-wrapping"
+          required
         />
       </div>
     </div>
   </div>
   <div class="row row d-flex justify-content-center">
     <div class="col-9 d-flex align-items-center justify-content-end">
-      <button type="submit" class="btn btn-light mt-2 mb-2">
+      <button
+        [disabled]="!registerForm.valid"
+        type="submit"
+        class="btn btn-light mt-2 mb-2"
+      >
         Sign up
       </button>
     </div>

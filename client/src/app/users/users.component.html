@@ -1,4 +1,4 @@
-<div class="row">
+<div class="row" *ngIf="users.length; else noUsers">
   <div class="col-sm d-flex justify-content-center">
     <button (click)="getAllUsers()" class="btn btn-light ml-1 mr-1">
       Get Users Again
@@ -6,6 +6,7 @@
     <button (click)="onSelect('newUser')" class="btn btn-light ml-1 mr-1">
       Add New User
     </button>
+    <span> {{ users.length }} </span>
   </div>
 </div>
 <div class="row">
@@ -22,8 +23,8 @@
           {{ user._id }}
         </p>
         <p class="font-weight-normal">
-          <span class="font-weight-bold">Email: </span>
-          {{ user.email }}
+          <span class="font-weight-bold">Login: </span>
+          {{ user.login }}
         </p>
         <p class="font-weight-normal">
           <span class="font-weight-bold">Created : </span>
@@ -33,3 +34,9 @@
     </div>
   </div>
 </div>
+
+<ng-template #noUsers>
+  <div class="d-flex flex-column align-items-center">
+    <p>Brak użytkowników do wyświetlenia</p>
+  </div>
+</ng-template>

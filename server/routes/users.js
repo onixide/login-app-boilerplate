@@ -41,21 +41,21 @@ router.get('/:id', async (req, res, next) => {
 
 router.post('/', async (req, res, next) => {
 	try {
-		let user = await User.findOne({ email: req.body.email });
+		let user = await User.findOne({ login: req.body.login });
 		//user exist
 		if (user)
 			return res.status(409).json({
 				success: false,
-				message: `Użytkownik - ${user.email} - już istnieje`
+				message: `Użytkownik - ${user.login} - już istnieje`
 			});
 		// user dont exist
-		user = new User(({ email, password } = req.body));
+		user = new User(({ login, password } = req.body));
 		// password hash
 		let salt = await bcrypt.genSalt(10);
 		user.password = await bcrypt.hash(user.password, salt);
 		//save to db and res
 		user = await user.save();
-		res.json(user.email).status(201);
+		res.json(user.login).status(201);
 	} catch (ex) {
 		next(ex);
 	}

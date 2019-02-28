@@ -9,20 +9,18 @@
           type="text"
           name="login-username"
           class="form-control"
-          aria-label="Username"
-          aria-describedby="addon-wrapping"
+          required
         />
       </div>
 
-      <label for="login-login-password" class="pb-2 pt-2">Password :</label>
+      <label for="login-password" class="pb-2 pt-2">Password :</label>
       <div class="input-group flex-nowrap">
         <input
           formControlName="password"
           type="password"
           name="login-password"
           class="form-control"
-          aria-label="Password"
-          aria-describedby="addon-wrapping"
+          required
         />
       </div>
     </div>
@@ -30,7 +28,11 @@
   <div class="row row d-flex justify-content-center">
     <div class="col-9 d-flex align-items-center justify-content-between">
       <span>Forget <a routerLink="/users">password</a>?</span>
-      <button type="submit" class="btn btn-light mt-2 mb-2">
+      <button
+        [disabled]="!loginForm.valid"
+        type="submit"
+        class="btn btn-light mt-2 mb-2"
+      >
         Sign in
       </button>
     </div>

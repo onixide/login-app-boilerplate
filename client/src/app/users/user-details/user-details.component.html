@@ -1,5 +1,5 @@
 <div>
-  <h4 class="text-center mt-3 mb-3">{{ user.email }}</h4>
+  <h4 class="text-center mt-3 mb-3">{{ user.login }}</h4>
   <div
     *ngIf="!invalidUser; else invalidUserComponent"
     class="list-group-item list-group-item-action"
@@ -20,7 +20,10 @@
 </div>
 
 <ng-template #invalidUserComponent>
-  <p>
-    {{ invalidUser.message }}
-  </p>
+  <div class="d-flex flex-column align-items-center">
+    <p>
+      {{ invalidUser.message }}
+    </p>
+    <button class="btn btn-light">Przejdź do listy użytkowników</button>
+  </div>
 </ng-template>

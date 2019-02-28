@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { UsersService } from './users.service';
 import { User } from '../models/user.model';
 import { ActivatedRoute, Router } from '@angular/router';
+
 @Component({
   selector: 'app-users',
   templateUrl: './users.component.html',
@@ -18,7 +19,7 @@ export class UsersComponent implements OnInit {
 
   ngOnInit() {
     this.route.data.subscribe(data => {
-      console.log(data);
+      console.log(data.users.length);
       this.users = data.users;
     });
   }
