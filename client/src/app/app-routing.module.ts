@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule, PreloadAllModules } from '@angular/router';
 import { UsersModule } from './users/users.module';
 import { AuthModule } from './auth/auth.module';
+import { AuthGuardService } from './auth/guards/auth-guard.service';
 
 const routes: Routes = [
   {
@@ -11,7 +12,8 @@ const routes: Routes = [
   },
   {
     path: 'users',
-    loadChildren: () => UsersModule
+    loadChildren: () => UsersModule,
+    canActivate: [AuthGuardService]
   },
   {
     path: 'auth',
@@ -32,6 +34,7 @@ const routes: Routes = [
       preloadingStrategy: PreloadAllModules
     })
   ],
-  exports: [RouterModule]
+  exports: [RouterModule],
+  providers: [AuthGuardService]
 })
 export class AppRoutingModule {}

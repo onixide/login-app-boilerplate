@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { User } from 'src/app/models/user.model';
-import { HttpClient, HttpErrorResponse } from '@angular/common/http';
+
+import { UsersService } from '../users.service';
 
 @Component({
   selector: 'app-user-details',
@@ -10,12 +11,14 @@ import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 })
 export class UserDetailsComponent implements OnInit {
   user: User;
+  editedUser: User;
   invalidUser: Boolean = false;
 
   constructor(
     // private recipeService: RecipeService,
     private route: ActivatedRoute,
-    private router: Router
+    private router: Router,
+    private usersService: UsersService
   ) {}
 
   ngOnInit() {
@@ -27,5 +30,24 @@ export class UserDetailsComponent implements OnInit {
       console.log(res.user);
       this.user = res.user;
     });
+  }
+
+  onDelete() {
+    this.usersService
+      .removeUser(this.user)
+      .subscribe(data => console.log(data), err => console.log(err));
+    this.router.navigate(['/users']);
+  }
+
+  onEdit() {
+    console.log('edit');
+    this.editedUser = {
+      _id: `${this.user._id}`,
+      login: 'Farme miau',
+      password: 'ijaijao'
+    };
+    this.usersService
+      .editUser(this.editedUser)
+      .subscribe(data => console.log(data), err => console.log(err));
   }
 }

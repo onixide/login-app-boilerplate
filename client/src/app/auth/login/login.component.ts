@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl } from '@angular/forms';
 import { AuthService } from '../auth.service';
 import { User } from 'src/app/models/user.model';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-login',
@@ -11,7 +12,7 @@ import { User } from 'src/app/models/user.model';
 export class LoginComponent implements OnInit {
   loginForm: FormGroup;
   user: User;
-  constructor(private authService: AuthService) {}
+  constructor(private authService: AuthService, private router: Router) {}
 
   ngOnInit() {
     this.loginForm = new FormGroup({
@@ -31,6 +32,7 @@ export class LoginComponent implements OnInit {
         if (data.success) {
           this.authService.storeUserData(data.token, data.user);
           console.log('USER LOGGED IN');
+          this.router.navigate(['/users']);
         }
       },
       err => console.log(err)

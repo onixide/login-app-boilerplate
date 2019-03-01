@@ -2,36 +2,44 @@
   class="navbar navbar-expand d-flex justify-content-between navbar-light bg-light mb-2"
 >
   <a class="navbar-brand">AdminApp</a>
-
+  <span *ngIf="authService.loggedIn()"> LOGGED </span>
   <ul class="navbar-nav">
     <li
-      style="cursor: pointer;"
-      class="nav-item"
+      *ngIf="!authService.loggedIn()"
       routerLink="/auth/login"
       routerLinkActive="active"
       [routerLinkActiveOptions]="{ exact: true }"
+      class="nav-item"
+      style="cursor: pointer;"
     >
       <a class="nav-link">Login</a>
     </li>
     <li
-      style="cursor: pointer;"
-      class="nav-item"
+      *ngIf="!authService.loggedIn()"
       routerLink="/auth/register"
       routerLinkActive="active"
       [routerLinkActiveOptions]="{ exact: true }"
+      class="nav-item"
+      style="cursor: pointer;"
     >
       <a class="nav-link">Register</a>
     </li>
     <li
-      style="cursor: pointer;"
-      class="nav-item"
+      *ngIf="authService.loggedIn()"
       routerLink="/users"
       routerLinkActive="active"
       [routerLinkActiveOptions]="{ exact: true }"
+      class="nav-item"
+      style="cursor: pointer;"
     >
       <a class="nav-link"> Users</a>
     </li>
-    <li style="cursor: pointer;" class="nav-item" (click)="onLogout()">
+    <li
+      *ngIf="authService.loggedIn()"
+      (click)="onLogout()"
+      style="cursor: pointer;"
+      class="nav-item"
+    >
       <a class="nav-link disabled">Logout</a>
     </li>
   </ul>

@@ -10,6 +10,7 @@ import { AuthModule } from './auth/auth.module';
 
 import { HeaderComponent } from '../app/shared/header/header.component';
 import { AppComponent } from './app.component';
+import { AuthGuardService } from './auth/guards/auth-guard.service';
 
 @NgModule({
   declarations: [AppComponent, HeaderComponent],
@@ -22,7 +23,6 @@ import { AppComponent } from './app.component';
     JwtModule.forRoot({
       config: {
         tokenGetter: function tokenGetter() {
-          console.log('TOKEN ZXZ');
           return localStorage.getItem('id_token');
         },
         whitelistedDomains: ['localhost:3000'],
