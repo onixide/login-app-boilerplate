@@ -4,6 +4,7 @@ import { UsersResolveService } from './users-resolve.service';
 import { UserDetailsResolveService } from './user-details/user-details-resolve.service';
 import { UsersComponent } from './users.component';
 import { UserDetailsComponent } from './user-details/user-details.component';
+import { NewUserComponent } from './new-user/new-user.component';
 
 const routes: Routes = [
   {
@@ -13,6 +14,10 @@ const routes: Routes = [
     resolve: {
       users: UsersResolveService
     }
+  },
+  {
+    path: 'new-user',
+    component: NewUserComponent
   },
   {
     path: ':id',

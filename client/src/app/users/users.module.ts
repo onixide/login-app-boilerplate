@@ -8,13 +8,15 @@ import { UsersService } from './users.service';
 import { UsersResolveService } from './users-resolve.service';
 import { UsersRoutingModule } from './users-routing.module';
 import { UserDetailsComponent } from './user-details/user-details.component';
+import { NewUserComponent } from './new-user/new-user.component';
 
 @NgModule({
   declarations: [
     UsersComponent,
     UserListComponent,
     UserListItemComponent,
-    UserDetailsComponent
+    UserDetailsComponent,
+    NewUserComponent
   ],
   imports: [CommonModule, UsersRoutingModule],
   providers: [UsersService, UsersResolveService]

@@ -1,12 +1,17 @@
-<div>
-  <h4 class="text-center mt-3 mb-3">{{ user.login }}</h4>
-  <div
-    *ngIf="!invalidUser; else invalidUserComponent"
-    class="list-group-item list-group-item-action"
-  >
+<div *ngIf="!invalidUser; else invalidUserComponent">
+  <h4 class="text-center mt-3 mb-3">
+    {{ editing ? ("Editing : "{{ user.login }}`) : ("Details : "{{
+      user.login
+    }}) }}
+  </h4>
+  <div class="list-group-item list-group-item-action">
     <p class="font-weight-normal">
       <span class="font-weight-bold">ID: </span>
       {{ user._id }}
+    </p>
+    <p class="font-weight-normal">
+      <span class="font-weight-bold">Login: </span>
+      {{ user.login }}
     </p>
     <p class="font-weight-normal">
       <span class="font-weight-bold">Created : </span>
@@ -17,7 +22,7 @@
       {{ user.password }}
     </p>
     <button (click)="onEdit()" class="btn btn-dark ml-1 mr-1">
-      Edit
+      {{ editing ? 'Done' : 'Edit' }}
     </button>
     <button (click)="onDelete()" class="btn btn-dark ml-1 mr-1">
       Delete
@@ -30,6 +35,8 @@
     <p>
       {{ invalidUser.message }}
     </p>
-    <button class="btn btn-light">Przejdź do listy użytkowników</button>
+    <button class="btn btn-light" routerLink="/users">
+      Przejdź do listy użytkowników
+    </button>
   </div>
 </ng-template>

@@ -19,7 +19,6 @@ export class UsersComponent implements OnInit {
 
   ngOnInit() {
     this.route.data.subscribe(data => {
-      console.log(data.users.length);
       this.users = data.users;
     });
   }
@@ -30,5 +29,10 @@ export class UsersComponent implements OnInit {
 
   onSelect(user: User) {
     this.router.navigate([`/users/${user._id}`]);
+  }
+
+  addNewUser() {
+    console.log('addNewUSER');
+    this.router.navigate([`/users/new-user`]);
   }
 }

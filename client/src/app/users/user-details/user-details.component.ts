@@ -12,7 +12,8 @@ import { UsersService } from '../users.service';
 export class UserDetailsComponent implements OnInit {
   user: User;
   editedUser: User;
-  invalidUser: Boolean = false;
+  invalidUser = false;
+  editing = false;
 
   constructor(
     // private recipeService: RecipeService,
