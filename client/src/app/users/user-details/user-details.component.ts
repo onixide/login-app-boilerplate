@@ -3,6 +3,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { User } from 'src/app/models/user.model';
 
 import { UsersService } from '../users.service';
+import { FormGroup, FormControl, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-user-details',
@@ -14,6 +15,9 @@ export class UserDetailsComponent implements OnInit {
   editedUser: User;
   invalidUser = false;
   editing = false;
+  userDetailsForm: FormGroup;
+  dirty = false;
+  errors = [];
 
   constructor(
     // private recipeService: RecipeService,
@@ -28,8 +32,18 @@ export class UserDetailsComponent implements OnInit {
         console.log(res.user.error.message);
         this.invalidUser = res.user.error;
       }
-      console.log(res.user);
+      console.log(JSON.stringify(res.user));
       this.user = res.user;
+    });
+    this.createForm();
+  }
+
+  createForm() {
+    this.userDetailsForm = new FormGroup({
+      userLogin: new FormControl(
+        { value: this.user.login, disabled: true },
+        Validators.required
+      )
     });
   }
 
@@ -40,15 +54,55 @@ export class UserDetailsComponent implements OnInit {
     this.router.navigate(['/users']);
   }
 
+  onInput(event) {
+    const dirtyHook = this.userDetailsForm.get('userLogin').dirty;
+    const valueHook = this.userDetailsForm.get('userLogin').value;
+    console.log(this.editedUser);
+    this.editedUser.login = valueHook;
+    if (
+      dirtyHook &&
+      JSON.stringify(valueHook) === JSON.stringify(this.user.login)
+    ) {
+      this.dirty = false;
+    } else {
+      this.dirty = true;
+    }
+  }
+
   onEdit() {
-    console.log('edit');
-    this.editedUser = {
-      _id: `${this.user._id}`,
-      login: 'Farme miau',
-      password: 'ijaijao'
-    };
-    this.usersService
-      .editUser(this.editedUser)
-      .subscribe(data => console.log(data), err => console.log(err));
+    this.editing = !this.editing;
+    this.editedUser = Object.assign({}, this.user);
+
+    if (this.editing) {
+      this.userDetailsForm.get('userLogin').enable();
+      console.log(this.userDetailsForm.get('userLogin'));
+    } else {
+      this.userDetailsForm.get('userLogin').disable();
+    }
+  }
+
+  onCancel() {
+    this.editing = false;
+    this.dirty = false;
+    this.editedUser = Object.assign({}, this.user);
+    this.userDetailsForm.get('userLogin').disable();
+    console.log('CANCEL');
+    this.createForm();
+  }
+
+  onSubmit() {
+    console.log('submittttt');
+
+    this.usersService.editUser(this.editedUser).subscribe(
+      data => {
+        console.log('Edytowano');
+        console.log(data);
+        this.router.navigate([`users`]);
+      },
+      err => {
+        console.log(err);
+        this.errors.push(err.error.message);
+      }
+    );
   }
 }

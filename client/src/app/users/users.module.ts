@@ -9,6 +9,7 @@ import { UsersResolveService } from './users-resolve.service';
 import { UsersRoutingModule } from './users-routing.module';
 import { UserDetailsComponent } from './user-details/user-details.component';
 import { NewUserComponent } from './new-user/new-user.component';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -18,7 +19,7 @@ import { NewUserComponent } from './new-user/new-user.component';
     UserDetailsComponent,
     NewUserComponent
   ],
-  imports: [CommonModule, UsersRoutingModule],
+  imports: [CommonModule, UsersRoutingModule, ReactiveFormsModule],
   providers: [UsersService, UsersResolveService]
 })
 export class UsersModule {}

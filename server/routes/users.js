@@ -6,7 +6,7 @@ const bcrypt = require('bcrypt');
 router.get('/', async (req, res, next) => {
 	try {
 		//get all users
-		let users = await User.find();
+		let users = await User.find().sort('created');
 		res.json(users).status(200);
 	} catch (ex) {
 		next(ex);
@@ -63,13 +63,22 @@ router.post('/', async (req, res, next) => {
 
 router.put('/:id', async (req, res, next) => {
 	try {
-		//update user
-		let updatedUser = await User.findByIdAndUpdate(
-			req.params.id,
-			req.body,
-			{ new: true }
-		);
-		res.json(updatedUser);
+		let user = await User.findOne({ login: req.body.login });
+		//user exist
+		if (user)
+			return res.status(409).json({
+				success: false,
+				message: `Użytkownik - ${user.login} - już istnieje`
+			});
+		else {
+			//update user
+			let updatedUser = await User.findByIdAndUpdate(
+				req.params.id,
+				req.body,
+				{ new: true }
+			);
+			res.json(updatedUser);
+		}
 	} catch (ex) {
 		next(ex);
 	}

@@ -3,6 +3,7 @@ import { Routes, RouterModule, PreloadAllModules } from '@angular/router';
 import { UsersModule } from './users/users.module';
 import { AuthModule } from './auth/auth.module';
 import { AuthGuardService } from './auth/guards/auth-guard.service';
+import { NoAuthGuardService } from './auth/guards/no-auth-guard.service';
 
 const routes: Routes = [
   {
@@ -17,7 +18,8 @@ const routes: Routes = [
   },
   {
     path: 'auth',
-    loadChildren: () => AuthModule
+    loadChildren: () => AuthModule,
+    canActivate: [NoAuthGuardService]
   },
   {
     path: '**',
@@ -35,6 +37,6 @@ const routes: Routes = [
     })
   ],
   exports: [RouterModule],
-  providers: [AuthGuardService]
+  providers: [AuthGuardService, NoAuthGuardService]
 })
 export class AppRoutingModule {}
