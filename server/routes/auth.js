@@ -28,7 +28,7 @@ router.post('/', async (req, res, next) => {
 			{ data: user, www: 'something else' },
 			config.get('jwt.secret'),
 			{
-				expiresIn: 86400 // 1 day expire
+				expiresIn: 3600 // token expire in seconds
 			}
 		);
 

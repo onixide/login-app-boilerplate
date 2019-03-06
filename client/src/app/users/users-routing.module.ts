@@ -5,23 +5,27 @@ import { UserDetailsResolveService } from './user-details/user-details-resolve.s
 import { UsersComponent } from './users.component';
 import { UserDetailsComponent } from './user-details/user-details.component';
 import { NewUserComponent } from './new-user/new-user.component';
+import { AuthGuardService } from './../auth/guards/auth-guard.service';
 
 const routes: Routes = [
   {
     path: '',
     component: UsersComponent,
     pathMatch: 'full',
+    canActivate: [AuthGuardService],
     resolve: {
       users: UsersResolveService
     }
   },
   {
     path: 'new-user',
-    component: NewUserComponent
+    component: NewUserComponent,
+    canActivate: [AuthGuardService]
   },
   {
     path: ':id',
     component: UserDetailsComponent,
+    canActivate: [AuthGuardService],
     resolve: {
       user: UserDetailsResolveService
     }

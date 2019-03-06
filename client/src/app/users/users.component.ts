@@ -20,11 +20,16 @@ export class UsersComponent implements OnInit {
   ngOnInit() {
     this.route.data.subscribe(data => {
       this.users = data.users;
+      console.log('init');
+      console.log(this.users);
     });
   }
 
   getAllUsers() {
-    this.usersService.getUsers().subscribe(data => console.log(data));
+    this.usersService.getUsers().subscribe(data => {
+      this.users = data;
+      console.log(data);
+    });
   }
 
   onSelect(user: User) {

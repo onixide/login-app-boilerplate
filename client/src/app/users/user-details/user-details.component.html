@@ -5,14 +5,6 @@
     }}) }} -->
     {{ editing ? 'Editing' : 'Details' }} : {{ user.login }}
   </h4>
-  <div class="d-flex justify-content-between">
-    <p [style.visibility]="!dirty ? 'hidden' : 'visible'">
-      {{ user.login }} -> {{ editedUser?.login }}
-    </p>
-    <p *ngIf="errors.length !== 0" class="text-danger">
-      {{ errors }}
-    </p>
-  </div>
 
   <form [formGroup]="userDetailsForm" #f (ngSubmit)="onSubmit()">
     <div class="pb-2 pt-2">
@@ -44,9 +36,27 @@
           formControlName="userLogin"
           required
           minlength="2"
-          (keyup)="onInput($event)"
+          #loginValue
         />
       </div>
+
+      <div class="input-group ">
+        <div class="input-group-prepend">
+          <label for="userPassword" class="font-weight-bold input-group-text"
+            >New Password?:
+          </label>
+        </div>
+        <input
+          type="password"
+          class="form-control"
+          name="userPassword"
+          formControlName="userPassword"
+          required
+          minlength="2"
+          #passwordValue
+        />
+      </div>
+
       <div class="input-group">
         <div class="input-group-prepend">
           <label for="userLogin" class="font-weight-bold input-group-text "
@@ -63,48 +73,69 @@
       </div>
     </div>
     <!-- </div> -->
-
-    <button
-      *ngIf="!editing"
-      (click)="onEdit()"
-      class="btn btn-dark ml-1 mr-1"
-      type="button"
-    >
-      Edit
-    </button>
-
-    <button
-      *ngIf="editing"
-      (click)="onCancel()"
-      class="btn btn-dark ml-1 mr-1"
-      type="button"
-    >
-      Cancel
-    </button>
-
-    <button (click)="onDelete()" class="btn btn-dark ml-1 mr-1" type="button">
-      Delete
-    </button>
-
-    <button *ngIf="dirty" class="btn btn-dark ml-1 mr-1" type="submit">
-      Save
-    </button>
-
+    <div class="d-flex justify-content-between">
+      <div>
+        <button
+          *ngIf="!editing"
+          (click)="onEdit()"
+          class="btn btn-dark ml-1 mr-1"
+          type="button"
+        >
+          Edit
+        </button>
+        <button
+          *ngIf="editing"
+          (click)="onCancel()"
+          class="btn btn-dark ml-1 mr-1"
+          type="button"
+        >
+          Cancel
+        </button>
+      </div>
+      <div>
+        <button
+          (click)="onDelete()"
+          class="btn btn-dark ml-1 mr-1"
+          type="button"
+        >
+          Delete
+        </button>
+        <button *ngIf="editing" class="btn btn-dark ml-1 mr-1" type="submit">
+          Save
+        </button>
+      </div>
+    </div>
     <!-- <button *ng-If="heroForm.touched" (click)="onDelete()" class="btn btn-dark ml-1 mr-1" type="submit">
     Save
-  </button> -->
+</button> -->
     <!-- </div> -->
     <!-- </div> -->
   </form>
 
-  <ng-template #invalidUserComponent>
-    <div class="d-flex flex-column align-items-center">
+  <div class="d-flex flex-column mt-4">
+    <div *ngIf="editing">
       <p>
-        {{ invalidUser.message }}
+        Login changes <br />
+        {{ user.login }} -> {{ loginValue.value }}
       </p>
-      <button class="btn btn-light" routerLink="/users">
-        Przejdź do listy użytkowników
-      </button>
     </div>
-  </ng-template>
+    <p *ngIf="passwordValue.value">
+      Password changed.
+    </p>
+
+    <p *ngIf="errors.duplicate" class="text-danger">
+      {{ errors.duplicate }}
+    </p>
+  </div>
 </div>
+
+<ng-template #invalidUserComponent>
+  <div class="d-flex flex-column align-items-center">
+    <p>
+      {{ invalidUser.message }}
+    </p>
+    <button class="btn btn-light" routerLink="/users">
+      Przejdź do listy użytkowników
+    </button>
+  </div>
+</ng-template>

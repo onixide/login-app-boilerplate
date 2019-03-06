@@ -1,15 +1,14 @@
-<div class="row" *ngIf="users.length; else noUsers">
-  <div class="col-sm d-flex justify-content-center">
-    <button (click)="getAllUsers()" class="btn btn-light ml-1 mr-1">
-      Get Users Again
-    </button>
-    <button (click)="addNewUser()" class="btn btn-light ml-1 mr-1">
-      Add New User
-    </button>
-    <span> {{ users.length }} </span>
-  </div>
+<div class="col-sm d-flex justify-content-center">
+  <button (click)="getAllUsers()" class="btn btn-light ml-1 mr-1">
+    Refresh List
+  </button>
+  <button (click)="addNewUser()" class="btn btn-light ml-1 mr-1">
+    Add New User
+  </button>
+  <span> {{ users.length }} </span>
 </div>
-<div class="row">
+
+<div class="row" *ngIf="users.length; else noUsers">
   <div class="col-sm d-flex justify-content-center mt-2">
     <div class="list-group">
       <li

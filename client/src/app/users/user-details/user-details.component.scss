@@ -1,3 +1,4 @@
-input[type='text']:disabled {
+input[type='text']:disabled,
+input[type='password']:disabled {
   background-color: #f8f9fa;
 }

@@ -6,7 +6,7 @@ const bcrypt = require('bcrypt');
 router.get('/', async (req, res, next) => {
 	try {
 		//get all users
-		let users = await User.find().sort('created');
+		let users = await User.find().sort('-created');
 		res.json(users).status(200);
 	} catch (ex) {
 		next(ex);
@@ -61,20 +61,39 @@ router.post('/', async (req, res, next) => {
 	}
 });
 
+// szukanie po id
+// sprawdzanie, czy login jest wolny
+// zajety i inne id - blad
+//zajety i to samo id - ok
+//wolny - update
+
 router.put('/:id', async (req, res, next) => {
 	try {
-		let user = await User.findOne({ login: req.body.login });
+		let userID = await User.findById({ _id: req.body._id });
 		//user exist
-		if (user)
+		if (userID)
 			return res.status(409).json({
 				success: false,
 				message: `Użytkownik - ${user.login} - już istnieje`
 			});
 		else {
 			//update user
+
+			// let salt = await bcrypt.genSalt(10);
+			// let updatedUserData = { login, password } = req.body;
+			// let updatedUserData = await bcrypt.hash(
+			// 	req.params.password,
+			// 	salt
+			// );
+
+			let updatedUserData = Object.assign({}, req.body);
+			if (updatedUserData.password === '') {
+				delete updatedUserData.password;
+			}
+
 			let updatedUser = await User.findByIdAndUpdate(
 				req.params.id,
-				req.body,
+				updatedUserData,
 				{ new: true }
 			);
 			res.json(updatedUser);
