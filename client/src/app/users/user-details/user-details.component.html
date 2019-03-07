@@ -1,8 +1,5 @@
 <div *ngIf="!invalidUser; else invalidUserComponent">
   <h4 class="text-center mt-3 mb-3">
-    <!-- {{ editing ? ("Editing : "{{ user.login }}`) : ("Details : "{{
-      user.login
-    }}) }} -->
     {{ editing ? 'Editing' : 'Details' }} : {{ user.login }}
   </h4>
 
@@ -10,7 +7,7 @@
     <div class="pb-2 pt-2">
       <div class="input-group">
         <div class="input-group-prepend">
-          <label for="uderID" class="font-weight-bold input-group-text"
+          <label for="userId" class="font-weight-bold input-group-text"
             >ID:
           </label>
         </div>
@@ -18,7 +15,7 @@
           type="text"
           class="form-control"
           [value]="user._id"
-          name="userID"
+          name="userId"
           disabled
         />
       </div>
@@ -33,17 +30,17 @@
           type="text"
           class="form-control"
           name="userLogin"
-          formControlName="userLogin"
-          required
-          minlength="2"
-          #loginValue
+          [value]="user.login"
+          disabled
         />
       </div>
 
-      <div class="input-group ">
+      <p>Created : {{ user.created | date: medium }}</p>
+
+      <div class="input-group" class="mt- mb-2" *ngIf="editing">
         <div class="input-group-prepend">
           <label for="userPassword" class="font-weight-bold input-group-text"
-            >New Password?:
+            >New Password:
           </label>
         </div>
         <input
@@ -53,82 +50,51 @@
           formControlName="userPassword"
           required
           minlength="2"
-          #passwordValue
         />
       </div>
 
-      <div class="input-group">
-        <div class="input-group-prepend">
-          <label for="userLogin" class="font-weight-bold input-group-text "
-            >Created:
-          </label>
+      <!-- </div> -->
+      <div class="d-flex justify-content-between">
+        <div>
+          <button
+            *ngIf="!editing"
+            (click)="onEdit()"
+            class="btn btn-dark ml-1 mr-1"
+            type="button"
+          >
+            Edit
+          </button>
+          <button
+            *ngIf="editing"
+            (click)="onCancel()"
+            class="btn btn-dark ml-1 mr-1"
+            type="button"
+          >
+            Cancel
+          </button>
         </div>
-        <input
-          type="text"
-          class="form-control"
-          [value]="user.created | date: 'medium'"
-          name="userLogin"
-          disabled
-        />
+        <div>
+          <button
+            (click)="onDelete()"
+            class="btn btn-dark ml-1 mr-1"
+            type="button"
+          >
+            Delete
+          </button>
+          <button *ngIf="editing" class="btn btn-dark ml-1 mr-1" type="submit">
+            Save
+          </button>
+        </div>
+      </div>
+
+      <div class="d-flex flex-column mt-4">
+        <!-- <p *ngIf="passwordValue.value"> -->
+        Password changed.
+        <!-- </p> -->
       </div>
     </div>
-    <!-- </div> -->
-    <div class="d-flex justify-content-between">
-      <div>
-        <button
-          *ngIf="!editing"
-          (click)="onEdit()"
-          class="btn btn-dark ml-1 mr-1"
-          type="button"
-        >
-          Edit
-        </button>
-        <button
-          *ngIf="editing"
-          (click)="onCancel()"
-          class="btn btn-dark ml-1 mr-1"
-          type="button"
-        >
-          Cancel
-        </button>
-      </div>
-      <div>
-        <button
-          (click)="onDelete()"
-          class="btn btn-dark ml-1 mr-1"
-          type="button"
-        >
-          Delete
-        </button>
-        <button *ngIf="editing" class="btn btn-dark ml-1 mr-1" type="submit">
-          Save
-        </button>
-      </div>
-    </div>
-    <!-- <button *ng-If="heroForm.touched" (click)="onDelete()" class="btn btn-dark ml-1 mr-1" type="submit">
-    Save
-</button> -->
-    <!-- </div> -->
-    <!-- </div> -->
   </form>
-
-  <div class="d-flex flex-column mt-4">
-    <div *ngIf="editing">
-      <p>
-        Login changes <br />
-        {{ user.login }} -> {{ loginValue.value }}
-      </p>
-    </div>
-    <p *ngIf="passwordValue.value">
-      Password changed.
-    </p>
-
-    <p *ngIf="errors.duplicate" class="text-danger">
-      {{ errors.duplicate }}
-    </p>
-  </div>
 </div>
-
 <ng-template #invalidUserComponent>
   <div class="d-flex flex-column align-items-center">
     <p>

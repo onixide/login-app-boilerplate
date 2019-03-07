@@ -61,43 +61,21 @@ router.post('/', async (req, res, next) => {
 	}
 });
 
-// szukanie po id
-// sprawdzanie, czy login jest wolny
-// zajety i inne id - blad
-//zajety i to samo id - ok
-//wolny - update
-
 router.put('/:id', async (req, res, next) => {
 	try {
-		let userID = await User.findById({ _id: req.body._id });
-		//user exist
-		if (userID)
-			return res.status(409).json({
-				success: false,
-				message: `Użytkownik - ${user.login} - już istnieje`
-			});
-		else {
-			//update user
+		let reqCopy = Object.assign({}, req.body);
 
-			// let salt = await bcrypt.genSalt(10);
-			// let updatedUserData = { login, password } = req.body;
-			// let updatedUserData = await bcrypt.hash(
-			// 	req.params.password,
-			// 	salt
-			// );
-
-			let updatedUserData = Object.assign({}, req.body);
-			if (updatedUserData.password === '') {
-				delete updatedUserData.password;
-			}
-
-			let updatedUser = await User.findByIdAndUpdate(
-				req.params.id,
-				updatedUserData,
-				{ new: true }
-			);
-			res.json(updatedUser);
+		if (reqCopy.password === '') {
+			delete reqCopy.password;
+		} else {
+			let salt = await bcrypt.genSalt(10);
+			let reqCopyPassword = await bcrypt.hash(reqCopy.password, salt);
+			reqCopy.password = reqCopyPassword;
 		}
+		let updatedUser = await User.findByIdAndUpdate(reqCopy._id, reqCopy, {
+			new: true
+		});
+		res.json(updatedUser);
 	} catch (ex) {
 		next(ex);
 	}

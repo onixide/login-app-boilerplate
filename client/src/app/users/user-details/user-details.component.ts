@@ -12,7 +12,7 @@ import { FormGroup, FormControl, Validators } from '@angular/forms';
 })
 export class UserDetailsComponent implements OnInit {
   user: User;
-  editedUser: User = { _id: '', login: '', password: '' };
+  editedUser: any = { _id: '', password: '' };
   invalidUser: any;
   editing = false;
   userDetailsForm: FormGroup;
@@ -43,10 +43,6 @@ export class UserDetailsComponent implements OnInit {
 
   createForm() {
     this.userDetailsForm = new FormGroup({
-      userLogin: new FormControl(
-        { value: this.user.login, disabled: true },
-        Validators.required
-      ),
       userPassword: new FormControl({ value: '', disabled: true })
     });
   }
@@ -62,30 +58,25 @@ export class UserDetailsComponent implements OnInit {
 
   onEdit() {
     this.editing = !this.editing;
-    this.editedUser.login = this.user.login;
 
     if (this.editing) {
       this.userDetailsForm.get('userPassword').enable();
-      this.userDetailsForm.get('userLogin').enable();
     } else {
       this.userDetailsForm.get('userPassword').disable();
-      this.userDetailsForm.get('userLogin').disable();
     }
   }
 
   onCancel() {
     this.editing = false;
-    this.editedUser.login = '';
+
     this.editedUser.password = '';
-    this.errors.duplicate = false;
-    this.userDetailsForm.get('userLogin').disable();
+
     this.userDetailsForm.get('userPassword').disable();
     this.createForm();
   }
 
   onSubmit() {
     this.editedUser._id = this.user._id;
-    this.editedUser.login = this.userDetailsForm.get('userLogin').value;
     this.editedUser.password = this.userDetailsForm.get('userPassword').value;
 
     this.usersService.editUser(this.editedUser).subscribe(
