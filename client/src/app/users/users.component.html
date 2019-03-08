@@ -7,35 +7,4 @@
   </button>
   <span> {{ users.length }} </span>
 </div>
-
-<div class="row" *ngIf="users.length; else noUsers">
-  <div class="col-sm d-flex justify-content-center mt-2">
-    <div class="list-group">
-      <li
-        *ngFor="let user of users"
-        (click)="onSelect(user)"
-        class="list-group-item list-group-item-action"
-        style="cursor: pointer;"
-      >
-        <p class="font-weight-normal">
-          <span class="font-weight-bold">ID: </span>
-          {{ user._id }}
-        </p>
-        <p class="font-weight-normal">
-          <span class="font-weight-bold">Login: </span>
-          {{ user.login }}
-        </p>
-        <p class="font-weight-normal">
-          <span class="font-weight-bold">Created : </span>
-          {{ user.created | date: 'medium' }}
-        </p>
-      </li>
-    </div>
-  </div>
-</div>
-
-<ng-template #noUsers>
-  <div class="d-flex flex-column align-items-center">
-    <p>Brak użytkowników do wyświetlenia</p>
-  </div>
-</ng-template>
+<app-user-list [users]="users"></app-user-list>

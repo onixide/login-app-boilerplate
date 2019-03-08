@@ -1,3 +1,18 @@
-<p>
-  user-list-item works!
-</p>
+<li
+  (click)="onSelect(user)"
+  class="list-group-item list-group-item-action"
+  style="cursor: pointer;"
+>
+  <p class="font-weight-normal">
+    <span class="font-weight-bold">ID: </span>
+    {{ user._id }}
+  </p>
+  <p class="font-weight-normal">
+    <span class="font-weight-bold">Login: </span>
+    {{ user.login }}
+  </p>
+  <p class="font-weight-normal">
+    <span class="font-weight-bold">Created : </span>
+    {{ user.created | date: 'medium' }}
+  </p>
+</li>

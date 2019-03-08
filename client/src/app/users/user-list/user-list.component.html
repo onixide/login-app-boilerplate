@@ -1,3 +1,16 @@
-<p>
-  user-list works!
-</p>
+<div class="row" *ngIf="users.length; else noUsers">
+  <div class="col-sm d-flex justify-content-center mt-2">
+    <div class="list-group">
+      <app-user-list-item
+        *ngFor="let user of users"
+        [user]="user"
+      ></app-user-list-item>
+    </div>
+  </div>
+</div>
+
+<ng-template #noUsers>
+  <div class="d-flex flex-column align-items-center">
+    <p>Brak użytkowników do wyświetlenia</p>
+  </div>
+</ng-template>

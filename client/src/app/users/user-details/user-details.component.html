@@ -1,100 +1,65 @@
-<div *ngIf="!invalidUser; else invalidUserComponent">
-  <h4 class="text-center mt-3 mb-3">
-    {{ editing ? 'Editing' : 'Details' }} : {{ user.login }}
-  </h4>
-
-  <form [formGroup]="userDetailsForm" #f (ngSubmit)="onSubmit()">
-    <div class="pb-2 pt-2">
-      <div class="input-group">
-        <div class="input-group-prepend">
-          <label for="userId" class="font-weight-bold input-group-text"
-            >ID:
-          </label>
-        </div>
-        <input
-          type="text"
-          class="form-control"
-          [value]="user._id"
-          name="userId"
-          disabled
-        />
-      </div>
-
-      <div class="input-group ">
-        <div class="input-group-prepend">
-          <label for="userLogin" class="font-weight-bold input-group-text"
-            >Login:
-          </label>
-        </div>
-        <input
-          type="text"
-          class="form-control"
-          name="userLogin"
-          [value]="user.login"
-          disabled
-        />
-      </div>
-
-      <p>Created : {{ user.created | date: medium }}</p>
-
-      <div class="input-group" class="mt- mb-2" *ngIf="editing">
-        <div class="input-group-prepend">
-          <label for="userPassword" class="font-weight-bold input-group-text"
-            >New Password:
-          </label>
-        </div>
-        <input
-          type="password"
-          class="form-control"
-          name="userPassword"
-          formControlName="userPassword"
-          required
-          minlength="2"
-        />
-      </div>
-
-      <!-- </div> -->
-      <div class="d-flex justify-content-between">
-        <div>
-          <button
-            *ngIf="!editing"
-            (click)="onEdit()"
-            class="btn btn-dark ml-1 mr-1"
-            type="button"
-          >
-            Edit
-          </button>
-          <button
-            *ngIf="editing"
-            (click)="onCancel()"
-            class="btn btn-dark ml-1 mr-1"
-            type="button"
-          >
-            Cancel
-          </button>
-        </div>
-        <div>
-          <button
-            (click)="onDelete()"
-            class="btn btn-dark ml-1 mr-1"
-            type="button"
-          >
-            Delete
-          </button>
-          <button *ngIf="editing" class="btn btn-dark ml-1 mr-1" type="submit">
-            Save
-          </button>
-        </div>
-      </div>
-
-      <div class="d-flex flex-column mt-4">
-        <!-- <p *ngIf="passwordValue.value"> -->
-        Password changed.
-        <!-- </p> -->
-      </div>
+<div *ngIf="!invalidUser; else invalidUserComponent" class="card mt-1 mb-3">
+  <form [formGroup]="userDetailsForm" (ngSubmit)="onSubmit()">
+    <div class="card-body">
+      <h4 class="pb-3 card-title">{{ user.login }}</h4>
+      <p class="card-text">
+        <span class="font-weight-bold">ID : </span>{{ user._id }}
+      </p>
+      <p class="card-text">
+        <span class="font-weight-bold">Created : </span
+        >{{ user.created | date: medium }}
+      </p>
+      <p class="card-text">
+        <span class="font-weight-bold">Info : </span>info jakieś
+      </p>
+      <p class="card-text">
+        <span class="font-weight-bold">Info2 : </span>info jakieś2
+      </p>
     </div>
   </form>
 </div>
+
+<div class="d-flex justify-content-between">
+  <div>
+    <button
+      *ngIf="!editing"
+      (click)="onEdit()"
+      class="btn btn-dark ml-1 mr-1"
+      type="button"
+    >
+      Edit
+    </button>
+    <button
+      *ngIf="editing"
+      (click)="onCancel()"
+      class="btn btn-dark ml-1 mr-1"
+      type="button"
+    >
+      Cancel
+    </button>
+  </div>
+  <div>
+    <button (click)="onDelete()" class="btn btn-dark ml-1 mr-1" type="button">
+      Delete
+    </button>
+    <button *ngIf="editing" class="btn btn-dark ml-1 mr-1" type="submit">
+      Save
+    </button>
+  </div>
+</div>
+
+<div class="card">
+  <div class="card-body">
+    <label for="userPassword" class="font-weight-bold">New password: </label>
+    <input type="password" class="form-control" name="userPassword" />
+
+    <label for="userPassword" class="font-weight-bold"
+      >Confirm new password:
+    </label>
+    <input type="password" class="form-control" name="userPassword" />
+  </div>
+</div>
+
 <ng-template #invalidUserComponent>
   <div class="d-flex flex-column align-items-center">
     <p>
