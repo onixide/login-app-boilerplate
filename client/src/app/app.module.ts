@@ -5,7 +5,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { JwtModule } from '@auth0/angular-jwt';
 
 import { AppRoutingModule } from './app-routing.module';
-import { UsersModule } from './users/users.module';
+import { UsersModule } from './containers/users/users.module';
 import { AuthModule } from './auth/auth.module';
 
 import { HeaderComponent } from '../app/shared/header/header.component';

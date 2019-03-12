@@ -5,7 +5,7 @@ import { Observable, of, pipe } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 
 import { User } from '../../models/User.model';
-import { UsersService } from './../users.service';
+import { UsersService } from '../users/users.service';
 
 @Injectable({
   providedIn: 'root'

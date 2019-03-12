@@ -6,8 +6,7 @@ import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-new-user',
-  templateUrl: './new-user.component.html',
-  styleUrls: ['./new-user.component.scss']
+  templateUrl: './new-user.component.html'
 })
 export class NewUserComponent implements OnInit {
   newUserForm: FormGroup;

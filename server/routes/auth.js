@@ -34,7 +34,7 @@ router.post('/', async (req, res, next) => {
 
 		res.json({
 			success: true,
-			token: `Bearer ${token}`,
+			token: token,
 			user: {
 				id: user._id,
 				login: user.login

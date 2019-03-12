@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule, PreloadAllModules } from '@angular/router';
-import { UsersModule } from './users/users.module';
+import { UsersModule } from './containers/users/users.module';
 import { AuthModule } from './auth/auth.module';
 import { AuthGuardService } from './auth/guards/auth-guard.service';
 import { NoAuthGuardService } from './auth/guards/no-auth-guard.service';

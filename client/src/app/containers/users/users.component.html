@@ -7,4 +7,4 @@
   </button>
   <span> {{ users.length }} </span>
 </div>
-<app-user-list [users]="users"></app-user-list>
+<app-user-list [users]="users" (deleteUser)="onDelUs($event)"></app-user-list>
