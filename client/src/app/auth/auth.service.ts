@@ -1,10 +1,10 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 
-import { Observable } from 'rxjs/internal/Observable';
-
+import { Observable, pipe, throwError } from 'rxjs';
+import { catchError } from 'rxjs/operators';
 import { JwtHelperService } from '@auth0/angular-jwt';
-
+import { HttpErrorResponse } from '@angular/common/http';
 import { User } from '../models/user.model';
 
 @Injectable({
@@ -20,11 +20,19 @@ export class AuthService {
   registerConfigUrl = 'http://localhost:3000/users';
 
   registerUser(newUser: User): Observable<any> {
-    return this.http.post(this.registerConfigUrl, newUser);
+    return this.http.post(this.registerConfigUrl, newUser).pipe(
+      catchError((error: HttpErrorResponse) => {
+        return throwError(error);
+      })
+    );
   }
 
   logUser(user: User): Observable<any> {
-    return this.http.post(this.authConfigUrl, user);
+    return this.http.post(this.authConfigUrl, user).pipe(
+      catchError((error: HttpErrorResponse) => {
+        return throwError(error);
+      })
+    );
   }
 
   storeUserData(token: string, user: string): void {
