@@ -19,7 +19,6 @@ export class UsersService {
   };
 
   getUsers() {
-    console.log(this.getToken);
     return this.http.get<User[]>(this.configUrl, this.httpOptions);
   }
 

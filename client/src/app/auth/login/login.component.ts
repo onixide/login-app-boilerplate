@@ -34,15 +34,9 @@ export class LoginComponent implements OnInit {
 
     this.authService.logUser(this.user).subscribe(
       data => {
-        console.log(data);
-
-        if (data.success) {
-          this.authService.storeUserData(data.token, data.user);
-          console.log('USER LOGGED IN');
-          this.router.navigate(['/users']);
-        } else {
-          console.log(data);
-        }
+        console.log(`USER " ${data.user.login} " LOGGED IN`);
+        this.authService.storeUserData(data.token, data.user);
+        this.router.navigate(['/users']);
       },
       err => {
         this.error.msg = err.error.msg;

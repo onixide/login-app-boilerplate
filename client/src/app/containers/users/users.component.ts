@@ -17,10 +17,9 @@ export class UsersComponent implements OnInit {
   ) {}
 
   ngOnInit() {
+    // take data from resolver
     this.route.data.subscribe(data => {
       this.users = data.users;
-      console.log('init');
-      console.log(this.users);
     });
   }
 
@@ -34,9 +33,5 @@ export class UsersComponent implements OnInit {
   addNewUser() {
     console.log('addNewUSER');
     this.router.navigate([`/users/new-user`]);
-  }
-
-  onDelUs(xxx) {
-    console.log(xxx);
   }
 }
