@@ -107,7 +107,7 @@ router.delete(
 				return res.status(409).json({
 					success: false,
 					message: `Użytkownik - ${
-						user.login
+						req.user.login
 					} - nie może zostać usunięty przez samego siebie ;)`
 				});
 			} else {

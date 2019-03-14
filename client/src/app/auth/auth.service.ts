@@ -30,7 +30,6 @@ export class AuthService {
   logUser(user: User): Observable<any> {
     return this.http.post(this.authConfigUrl, user).pipe(
       catchError((error: HttpErrorResponse) => {
-        console.log('SADSADSA');
         return throwError(error);
       })
     );

@@ -16,7 +16,7 @@ export class UserDetailsComponent implements OnInit {
   invalidUser: any;
   editing = false;
   userDetailsForm: FormGroup;
-  errors = { duplicate: false };
+  error: string;
 
   constructor(
     // private recipeService: RecipeService,
@@ -24,10 +24,11 @@ export class UserDetailsComponent implements OnInit {
     private router: Router,
     private usersService: UsersService
   ) {}
-
+  // TODO zrobić tutaj z errorCatch z resolvera i w drugim to samo
   ngOnInit() {
     this.route.data.subscribe(
       res => {
+        console.log('z resa');
         console.log(res.user.error);
         if (res.user.error) {
           this.invalidUser = res.user.error;
@@ -36,7 +37,10 @@ export class UserDetailsComponent implements OnInit {
         }
         this.user = res.user;
       },
-      err => console.log(err)
+      err => {
+        console.log('z error ');
+        console.log(err);
+      }
     );
     this.createForm();
   }
@@ -48,12 +52,13 @@ export class UserDetailsComponent implements OnInit {
   }
 
   onDelete() {
-    this.usersService
-      .removeUser(this.user)
-      .subscribe(
-        () => this.router.navigate(['/users']),
-        err => console.log(err)
-      );
+    this.usersService.removeUser(this.user).subscribe(
+      () => this.router.navigate(['/users']),
+      err => {
+        console.log(err);
+        this.error = err.error.msg;
+      }
+    );
   }
 
   onEdit() {
@@ -68,9 +73,7 @@ export class UserDetailsComponent implements OnInit {
 
   onCancel() {
     this.editing = false;
-
     this.editedUser.password = '';
-
     this.userDetailsForm.get('userPassword').disable();
     this.createForm();
   }
@@ -78,13 +81,13 @@ export class UserDetailsComponent implements OnInit {
   onSubmit() {
     this.editedUser._id = this.user._id;
     this.editedUser.password = this.userDetailsForm.get('userPassword').value;
-
     this.usersService.editUser(this.editedUser).subscribe(
       () => {
         this.router.navigate([`users`]);
       },
       err => {
-        this.errors.duplicate = err.error.message;
+        console.log(err);
+        this.error = err.error.msg;
       }
     );
   }

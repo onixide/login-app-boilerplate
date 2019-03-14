@@ -1,4 +1,7 @@
 <div *ngIf="!invalidUser; else invalidUserComponent" class="card mt-1 mb-3">
+  <p class="text-center text-danger error-messages">
+    {{ error }}
+  </p>
   <form [formGroup]="userDetailsForm" (ngSubmit)="onSubmit()">
     <div class="card-body">
       <h4 class="pb-3 card-title">{{ user.login }}</h4>

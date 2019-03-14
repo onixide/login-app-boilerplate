@@ -3,9 +3,6 @@ import { FormGroup, FormControl } from '@angular/forms';
 import { AuthService } from '../auth.service';
 import { User } from 'src/app/models/user.model';
 import { Router } from '@angular/router';
-import { Observable, pipe, throwError } from 'rxjs';
-import { catchError } from 'rxjs/operators';
-import { createError } from '@angular/core/src/render3/instructions';
 
 @Component({
   selector: 'app-login',
@@ -15,7 +12,7 @@ import { createError } from '@angular/core/src/render3/instructions';
 export class LoginComponent implements OnInit {
   loginForm: FormGroup;
   user: User;
-  error = { msg: '' };
+  error: string;
 
   constructor(private authService: AuthService, private router: Router) {}
 
@@ -39,8 +36,7 @@ export class LoginComponent implements OnInit {
         this.router.navigate(['/users']);
       },
       err => {
-        this.error.msg = err.error.msg;
-        console.log(err.error.msg);
+        this.error = err.error.msg;
       }
     );
   }

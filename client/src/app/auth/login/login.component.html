@@ -1,6 +1,6 @@
 <h2 class="text-center mt-4 mb-2">Please log in</h2>
 <p class="text-center text-danger error-messages">
-  {{ error.msg }}
+  {{ error }}
 </p>
 <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
   <div class="row d-flex justify-content-center">
@@ -32,8 +32,8 @@
     <div class="col-9 d-flex align-items-center justify-content-between">
       <span>Forget <a routerLink="/users">password</a>?</span>
       <button
-        [disabled]="!loginForm.valid"
         type="submit"
+        [disabled]="!loginForm.valid"
         class="btn btn-light mt-2 mb-2"
       >
         Sign in
