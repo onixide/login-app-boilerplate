@@ -4,7 +4,7 @@ import { Resolve, ActivatedRouteSnapshot, Router } from '@angular/router';
 import { Observable, of, pipe, throwError } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 
-import { User } from '../../models/User.model';
+import {User} from '../../models/user.model';
 import { UsersService } from '../users/users.service';
 
 @Injectable({
@@ -18,7 +18,8 @@ export class UserDetailsResolveService implements Resolve<User> {
 
     return this.usersService.getUserByID(route.params.id).pipe(
       catchError(err => {
-        return throwError(err);
+          // return new throwError(err);
+          return of(err);
       })
     );
   }
